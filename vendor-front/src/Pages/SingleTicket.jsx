@@ -14,13 +14,16 @@ function SingleTicket() {
     return;
     }
      getChat()
-  },[])
+  },[chat])
   
   const handleSubmit = async(e)=>{
     e.preventDefault();
-    setMessage('')
+    try{setMessage('')
     const data = {message:message,ticketId:id}
     axios.post('http://localhost:4000/addReply', {data:data})
+    setChat([{}])
+  }
+    catch(err){console.log(err.message)}
   }
   return (<>
   <h4>Recent Chats</h4>
@@ -30,7 +33,7 @@ function SingleTicket() {
     </>)
   })}
   <form onSubmit={handleSubmit}>
-      <textarea placeholder='Enter the Message That you want to Add' onChange={(e)=>{setMessage(e.target.value)}} value={message} rows="3" className='w-60 border-gray-400 border-2'></textarea>
+      <textarea placeholder='Enter the Message That you want to Add' onChange={(e)=>{setMessage(e.target.value)}} required value={message} rows="3" className='w-60 border-gray-400 border-2'></textarea>
       <br/><button type='submit' className='bg-slate-900 text-white px-4 py-2'>Add The message</button>
     </form></>
   )

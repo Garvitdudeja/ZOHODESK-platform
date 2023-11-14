@@ -16,4 +16,7 @@ Tom.get('/',(req,res)=>{
 })
 
 
+
 Tom.listen(4000,()=>{console.log("Tom running")})
+
+export default Tom;
